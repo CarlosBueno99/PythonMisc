@@ -4,7 +4,7 @@ import csv
 #pasta "incident" onde estão os arquivos PRÉ IMPORTAÇÃO (de):
 path = '/Users/CarlosB/Desktop/incident/'
 #pasta onde os anexos VÃO ESTAR de forma definitiva (para)
-definitiveDirectory = 'D:/TOPdesk/Uploads/incident/'
+FutureDir = 'D:/TOPdesk/Uploads/incident/'
 #nome do csv que vai ser gerado (não mudar):
 csvName = 'files.csv'
 #lugar onde você quer que o CSV esteja localizado
@@ -24,18 +24,18 @@ with open( csvName, 'w', newline='') as file:
     writer.writerow(["CallNumber", "filename", "size"])
     print("CallNumber ======= filename ======= size")
 
-    for filenames in os.listdir(path):
+    for directory in os.listdir(path):
 
-        directory = path + filenames + '/'
-        incidentNumber = filenames
+        rootDir = path + directory + '/'
+        incidentNumber = directory
 
 
-        for filenames in os.listdir(path+filenames):
+        for filenames in os.listdir(path+rootDir):
 
             attachmentName = filenames
             attachmentSizeInBytes = (os.stat(directory+filenames).st_size)
         
-            writer.writerow([incidentNumber, definitiveDirectory + incidentNumber + '/' + filenames, attachmentSizeInBytes])
-            print(incidentNumber, "|", definitiveDirectory + incidentNumber + filenames,"Size:", attachmentSizeInBytes)
+            writer.writerow([incidentNumber, FutureDir + incidentNumber + '/' + filenames, attachmentSizeInBytes])
+            print(incidentNumber, "|", FutureDir + incidentNumber + filenames,"Size:", attachmentSizeInBytes)
 
 print("CSV criado com sucesso:", csvDestination+ csvName)
