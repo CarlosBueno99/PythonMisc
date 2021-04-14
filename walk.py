@@ -1,7 +1,12 @@
 import os
 
-path="C:\\Users\\carlo\\Documents\\PythonStudy"
+path="C:\\"
+#print(list(os.walk(path)))
+print("----------------------")
 
-print(list(os.walk(path)))
-
-print("new test")
+for root, directoriesList, filesList in os.walk(path):
+    
+    if len(directoriesList) == 0:
+        print(root)
+        for eachFile in filesList:
+            print(os.path.join(root,eachFile))
