@@ -2,13 +2,13 @@ import os
 import csv
 
 #pasta "incident" onde estão os arquivos PRÉ IMPORTAÇÃO (de):
-path = '/Users/CarlosB/Desktop/incident/'
+path = 'C:/Users/carlo/Documents/chamados/example/'
 #pasta onde os anexos VÃO ESTAR de forma definitiva (para)
 FutureDir = 'D:/TOPdesk/Uploads/incident/'
 #nome do csv que vai ser gerado (não mudar):
 csvName = 'files.csv'
 #lugar onde você quer que o CSV esteja localizado
-csvDestination ='C:/Users/CarlosB/testeCSV/'
+csvDestination ='C:/Users/carlo/Documents/chamados/csvDestination'
 
 #variaveis diversas, não mexer
 directory = ''
@@ -30,12 +30,15 @@ with open( csvName, 'w', newline='') as file:
         incidentNumber = directory
 
 
-        for filenames in os.listdir(path+rootDir):
+        for filenames in os.listdir(rootDir):
 
             attachmentName = filenames
-            attachmentSizeInBytes = (os.stat(directory+filenames).st_size)
-        
+            attachmentSizeInBytes = (os.stat(rootDir+filenames).st_size)
+            printableSize = "| Size:" + str(attachmentSizeInBytes)
+            printableDirectoryAndIncidentNumber = incidentNumber+ " | "+ FutureDir + incidentNumber +'/'+ filenames
+
             writer.writerow([incidentNumber, FutureDir + incidentNumber + '/' + filenames, attachmentSizeInBytes])
-            print(incidentNumber, "|", FutureDir + incidentNumber + filenames,"Size:", attachmentSizeInBytes)
+            
+            print(printableDirectoryAndIncidentNumber, printableSize.rjust(os.get_terminal_size().columns+ -1 - len(printableDirectoryAndIncidentNumber)))
 
 print("CSV criado com sucesso:", csvDestination+ csvName)
