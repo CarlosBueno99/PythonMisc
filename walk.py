@@ -1,6 +1,6 @@
 import os
 
-path="C:\\"
+path="This PC\\Galaxy S9\\Phone\\Documents"
 #print(list(os.walk(path)))
 print("----------------------")
 
